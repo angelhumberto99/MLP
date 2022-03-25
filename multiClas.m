@@ -18,6 +18,8 @@ function [W1, W2] = multiClas(W1, W2, X, D, maxEpocas)
             e = d - y;
             delta = e;
 
+            error(i) = sum(abs(e));
+
             % retropropagamos el error
             e1 = W2' * delta;
             delta1 = y1 .* (1 - y1) .* e1;
@@ -29,5 +31,8 @@ function [W1, W2] = multiClas(W1, W2, X, D, maxEpocas)
             dW2 = a * delta * y1';
             W2 = W2 + dW2;
         end
+        convergencia(epoca) = sum(error);
     end
+    figure
+    plot(convergencia)
 end
